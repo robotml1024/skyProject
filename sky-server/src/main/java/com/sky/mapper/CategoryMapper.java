@@ -20,4 +20,6 @@ public interface CategoryMapper {
     Page<Category> getCategoryPage(CategoryPageQueryDTO categoryPageQueryDTO);
 
     void update(Category category);
+
+    void deleteById(Long id);
 }

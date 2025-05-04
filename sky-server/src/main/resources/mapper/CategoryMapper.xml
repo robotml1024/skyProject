@@ -26,4 +26,8 @@
         </set>
         where id = #{id}
     </update>
+
+    <delete id="deleteById">
+        delete from category where id = #{id}
+    </delete>
 </mapper>
