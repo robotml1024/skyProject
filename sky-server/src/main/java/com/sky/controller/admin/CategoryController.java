@@ -52,4 +52,11 @@ public class CategoryController {
         return Result.success();
     }
 
+    @PutMapping
+    @ApiOperation("修改分类")
+    public Result updateCategory(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.updateCategory(categoryDTO);
+        return Result.success();
+    }
+
 }

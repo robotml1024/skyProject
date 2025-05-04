@@ -60,4 +60,13 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder().id(id).status(status).build();
         categoryMapper.update(category);
     }
+
+    @Override
+    public void updateCategory(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        BeanUtils.copyProperties(categoryDTO, category);
+        category.setUpdateTime(LocalDateTime.now());
+        category.setUpdateUser(BaseContext.getCurrentId());
+        categoryMapper.update(category);
+    }
 }
