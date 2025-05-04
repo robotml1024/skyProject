@@ -8,10 +8,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/category")
@@ -20,13 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryServiceImpl;
+    private CategoryService categoryService;
 
     @PostMapping
     @ApiOperation("新增菜品分类")
     public Result addCategory(@RequestBody CategoryDTO categoryDTO) {
-        categoryServiceImpl.addCategory(categoryDTO);
+        categoryService.addCategory(categoryDTO);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("根据类型查询分类")
+    public Result<List<Category>> listCategory(Integer type) {
+        List<Category> list = categoryService.listCategory(type);
+
+        return Result.success(list);
     }
 
 }
