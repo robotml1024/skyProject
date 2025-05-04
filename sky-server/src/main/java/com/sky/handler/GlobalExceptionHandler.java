@@ -28,15 +28,15 @@ public class GlobalExceptionHandler {
         return Result.error(ex.getMessage());
     }
 
-    @ExceptionHandler
-    public Result exceptionHandler(SQLIntegrityConstraintViolationException ex) {
-        String message = ex.getMessage();
-        if (message.contains("Duplicate entry")) {
-            String username = message.split(" ")[2];
-            return Result.error(username + MessageConstant.ALREADY_EXISTS);
-        } else {
-            return Result.error(MessageConstant.UNKNOWN_ERROR);
-        }
-    }
+//    @ExceptionHandler
+//    public Result exceptionHandler(SQLIntegrityConstraintViolationException ex) {
+//        String message = ex.getMessage();
+//        if (message.contains("Duplicate entry")) {
+//            String username = message.split(" ")[2];
+//            return Result.error(username + MessageConstant.ALREADY_EXISTS);
+//        } else {
+//            return Result.error(MessageConstant.UNKNOWN_ERROR);
+//        }
+//    }
 
 }

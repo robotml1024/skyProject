@@ -28,5 +28,17 @@ public interface EmployeeMapper {
      */
     Page<Employee> getEmployeePage(EmployeePageQueryDTO employeePageQueryDTO);
 
-    void startOrStop(Employee employee);
+    /**
+     * 修改员工信息，也可用于启停员工账号
+     * @param employee
+     */
+    int updateEmployee(Employee employee);
+
+    /**
+     * 根据id湖片区员工信息
+     * @param id
+     * @return
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getEmployeeById(Long id);
 }

@@ -80,7 +80,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
-        // TODO改为当前用户登陆的id
         employee.setCreateUser(BaseContext.getCurrentId());
         employee.setUpdateUser(BaseContext.getCurrentId());
 
@@ -105,10 +104,45 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total, records);
     }
 
+    /**
+     * 启用和禁用员工账号
+     * @param status
+     * @param id
+     */
     @Override
     public void startOrStop(Integer status, Long id) {
         Employee employee = Employee.builder().id(id).status(status).build();
 
-        employeeMapper.startOrStop(employee);
+        employeeMapper.updateEmployee(employee);
+    }
+
+    /**
+     * 通过id获取员工信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee getEmployeeById(Long id) {
+        Employee employee = employeeMapper.getEmployeeById(id);
+        employee.setPassword("***");
+
+        return employee;
+    }
+
+    /**
+     * 更新员工数据
+     * 返回值表示影响行数
+     * @param employeeDTO
+     * @return
+     */
+    @Override
+    public int updateEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        return employeeMapper.updateEmployee(employee);
     }
 }
