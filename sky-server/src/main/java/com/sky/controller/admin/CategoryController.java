@@ -45,4 +45,11 @@ public class CategoryController {
         return Result.success(pageResult);
     }
 
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用分类")
+    public Result<String> updateCategoryStatus(@PathVariable Integer status, Long id) {
+        categoryService.updateCategoryStatus(status, id);
+        return Result.success();
+    }
+
 }

@@ -13,4 +13,6 @@ public interface CategoryService {
     List<Category> listCategory(Integer type);
 
     PageResult getCategoryPage(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    void updateCategoryStatus(Integer status, Long id);
 }
