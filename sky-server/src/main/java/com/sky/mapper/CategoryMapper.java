@@ -1,5 +1,7 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
+import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,4 +16,6 @@ public interface CategoryMapper {
 
     @Select("select * from category where type = #{type}")
     List<Category> selectByType(Integer type);
+
+    Page<Category> getCategoryPage(CategoryPageQueryDTO categoryPageQueryDTO);
 }
