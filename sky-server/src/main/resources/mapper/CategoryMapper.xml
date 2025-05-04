@@ -6,7 +6,7 @@
     <select id="getCategoryPage" resultType="Category">
         select * from category
         <where>
-            <if test="name != null and name != ''">name = #{name}</if>
+            <if test="name != null and name != ''">name like concat('%', #{name}, '%')</if>
             <if test="type != null and type != ''">type = #{type}</if>
         </where>
         order by sort desc
